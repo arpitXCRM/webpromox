@@ -175,6 +175,8 @@ export type Product = {
   metadata: Maybe<Scalars['JSON']['output']>;
   sales_channels_link: Maybe<Array<Maybe<LinkProductSalesChannel>>>;
   sales_channels: Maybe<Array<Maybe<SalesChannel>>>;
+  store_link: Maybe<LinkProductProductStoreStore>;
+  store: Maybe<Store>;
 };
 
 export type ProductVariant = {
@@ -784,6 +786,12 @@ export type Store = {
   updated_at: Scalars['DateTime']['output'];
   deleted_at: Maybe<Scalars['DateTime']['output']>;
   currency: Maybe<Currency>;
+  order_link: Maybe<LinkOrderOrderStoreStore>;
+  order: Maybe<Order>;
+  product_link: Maybe<LinkProductProductStoreStore>;
+  product: Maybe<Product>;
+  user_link: Maybe<LinkUserUserStoreStore>;
+  user: Maybe<User>;
 };
 
 export type StoreCurrency = {
@@ -1313,6 +1321,8 @@ export type Order = {
   customer: Maybe<Customer>;
   region: Maybe<Region>;
   sales_channel: Maybe<SalesChannel>;
+  store_link: Maybe<LinkOrderOrderStoreStore>;
+  store: Maybe<Store>;
 };
 
 export enum ReturnStatus {
@@ -1603,6 +1613,8 @@ export type User = {
   created_at: Scalars['DateTime']['output'];
   updated_at: Scalars['DateTime']['output'];
   deleted_at: Maybe<Scalars['DateTime']['output']>;
+  store_link: Maybe<LinkUserUserStoreStore>;
+  store: Maybe<Store>;
 };
 
 export type Invite = {
@@ -2001,6 +2013,39 @@ export type LinkShippingOptionPriceSet = {
   deletedAt: Maybe<Scalars['String']['output']>;
 };
 
+export type LinkOrderOrderStoreStore = {
+  __typename?: 'LinkOrderOrderStoreStore';
+  order_id: Scalars['String']['output'];
+  store_id: Scalars['String']['output'];
+  order: Maybe<Order>;
+  store: Maybe<Store>;
+  createdAt: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  deletedAt: Maybe<Scalars['String']['output']>;
+};
+
+export type LinkProductProductStoreStore = {
+  __typename?: 'LinkProductProductStoreStore';
+  product_id: Scalars['String']['output'];
+  store_id: Scalars['String']['output'];
+  product: Maybe<Product>;
+  store: Maybe<Store>;
+  createdAt: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  deletedAt: Maybe<Scalars['String']['output']>;
+};
+
+export type LinkUserUserStoreStore = {
+  __typename?: 'LinkUserUserStoreStore';
+  user_id: Scalars['String']['output'];
+  store_id: Scalars['String']['output'];
+  user: Maybe<User>;
+  store: Maybe<Store>;
+  createdAt: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  deletedAt: Maybe<Scalars['String']['output']>;
+};
+
 declare module '@medusajs/framework/types' {
   interface RemoteQueryEntryPoints {
     workflow_execution: WorkflowExecution
@@ -2196,5 +2241,8 @@ declare module '@medusajs/framework/types' {
     sales_channel_locations: LinkSalesChannelStockLocation
     shipping_option_price_set: LinkShippingOptionPriceSet
     shipping_option_price_sets: LinkShippingOptionPriceSet
+    order_store: LinkOrderOrderStoreStore
+    product_store: LinkProductProductStoreStore
+    user_store: LinkUserUserStoreStore
   }
 }
