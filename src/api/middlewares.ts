@@ -1,9 +1,10 @@
 import { defineMiddlewares } from "@medusajs/medusa";
 import { registerLoggedInUser } from "./middlewares/logged-in-user";
 import { addStoreIdToFilterableFields } from "./middlewares/add-store-id-to-filterable-fields";
-import { maybeApplyLinkFilter } from "@medusajs/framework";
+import { maybeApplyLinkFilter, validateAndTransformBody } from "@medusajs/framework";
 import { moveIdsToQueryFromFilterableFields } from "./middlewares/move-ids-to-query-from-filterable-fields";
 import { z } from "zod"
+import { PostCreateOrganization } from "./organization/validators"
 
 
 
@@ -48,6 +49,13 @@ export default defineMiddlewares({
         moveIdsToQueryFromFilterableFields,
       ],
     },
+     {
+            matcher: "/organization",
+            method: "POST",
+            middlewares: [
+              validateAndTransformBody(PostCreateOrganization),
+            ],
+          },
     // {
     //   method: "POST",
     //   matcher: "/store/orgs",

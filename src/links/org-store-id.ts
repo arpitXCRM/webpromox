@@ -1,8 +1,10 @@
 import { defineLink } from "@medusajs/framework/utils"
-import Orgs from "../modules/orgStore"
+import Orgs from "../modules/organization"
 import StoreModule from "@medusajs/medusa/store"
 
 export default defineLink(
-  StoreModule.linkable.store,
-  Orgs.linkable.orgStore
+  {linkable:StoreModule.linkable.store,
+    isList:true
+  },
+  Orgs.linkable.organization
 )

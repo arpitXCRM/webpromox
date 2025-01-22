@@ -788,6 +788,8 @@ export type Store = {
   currency: Maybe<Currency>;
   order_link: Maybe<LinkOrderOrderStoreStore>;
   order: Maybe<Order>;
+  organization_link: Maybe<LinkStoreStoreOrganizationOrganization>;
+  organization: Maybe<Organization>;
   product_link: Maybe<LinkProductProductStoreStore>;
   product: Maybe<Product>;
   user_link: Maybe<LinkUserUserStoreStore>;
@@ -1839,6 +1841,18 @@ export type Notification = {
   deleted_at: Maybe<Scalars['DateTime']['output']>;
 };
 
+export type Organization = {
+  __typename?: 'Organization';
+  id: Scalars['ID']['output'];
+  org: Scalars['String']['output'];
+  storeId: Array<Maybe<Scalars['String']['output']>>;
+  created_at: Scalars['DateTime']['output'];
+  updated_at: Scalars['DateTime']['output'];
+  deleted_at: Maybe<Scalars['DateTime']['output']>;
+  store_link: Maybe<Array<Maybe<LinkStoreStoreOrganizationOrganization>>>;
+  stores: Maybe<Array<Maybe<Store>>>;
+};
+
 export type LinkCartPaymentCollection = {
   __typename?: 'LinkCartPaymentCollection';
   cart_id: Scalars['String']['output'];
@@ -2019,6 +2033,17 @@ export type LinkOrderOrderStoreStore = {
   store_id: Scalars['String']['output'];
   order: Maybe<Order>;
   store: Maybe<Store>;
+  createdAt: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  deletedAt: Maybe<Scalars['String']['output']>;
+};
+
+export type LinkStoreStoreOrganizationOrganization = {
+  __typename?: 'LinkStoreStoreOrganizationOrganization';
+  store_id: Scalars['String']['output'];
+  organization_id: Scalars['String']['output'];
+  store: Maybe<Store>;
+  organization: Maybe<Organization>;
   createdAt: Scalars['String']['output'];
   updatedAt: Scalars['String']['output'];
   deletedAt: Maybe<Scalars['String']['output']>;
@@ -2209,6 +2234,8 @@ declare module '@medusajs/framework/types' {
     shipping_profiles: ShippingProfile
     notification: Notification
     notifications: Notification
+    organization: Organization
+    organizations: Organization
     cart_payment_collection: LinkCartPaymentCollection
     cart_payment_collections: LinkCartPaymentCollection
     cart_promotion: LinkCartPromotion
@@ -2242,6 +2269,7 @@ declare module '@medusajs/framework/types' {
     shipping_option_price_set: LinkShippingOptionPriceSet
     shipping_option_price_sets: LinkShippingOptionPriceSet
     order_store: LinkOrderOrderStoreStore
+    store_organization: LinkStoreStoreOrganizationOrganization
     product_store: LinkProductProductStoreStore
     user_store: LinkUserUserStoreStore
   }

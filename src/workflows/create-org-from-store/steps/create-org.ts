@@ -1,31 +1,34 @@
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import StoreOrgModuleService from "../../../modules/orgStore/service"
-import { ORGSTORE_MODULE } from "../../../modules/orgStore"
+import StoreOrgModuleService from "../../../modules/organization/service"
+import { ORGANIZATION_MODULE } from "../../../modules/organization"
 
 type CreateCustomOrgStepInput = {
-  org?: string
+  org: string,
+  storeId: [],
 }
 
 export const createOrgStep = createStep(
-  "create-custom",
-  async (data: CreateCustomOrgStepInput, { container }) => {
+  "create-organization",
+  async (data:any, { container }) => {
+    console.log(data,"data");
     if (!data.org) {
       return
     }
 
     const orgModuleService: StoreOrgModuleService = container.resolve(
-        ORGSTORE_MODULE
+      ORGANIZATION_MODULE
     )
 
-    const custom = await orgModuleService.createCustoms(data)
+    //this createOrganizations method auto created at the time of migrations
+    const custom = await orgModuleService.createOrganizations(data)
 
     return new StepResponse(custom, custom)
   },
   async (custom, { container }) => {
     const orgModuleService: StoreOrgModuleService = container.resolve(
-        ORGSTORE_MODULE
+      ORGANIZATION_MODULE
     )
 
-    await orgModuleService.deleteCustoms(custom.id)
+    await orgModuleService.deleteOrganizations(custom.id)
   }
 )
