@@ -10,11 +10,11 @@ import {
 } from "@medusajs/ui";
 
 export default function SignUpForm() {
+  
   const [storeName, setStoreName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // console.log("process.env.NEXT_PUBLIC_AUTH_CORS",process.env.NEXT_PUBLIC_AUTH_CORS);
-  // let __BACKEND_URL__ = process.env.NEXT_PUBLIC_AUTH_CORS;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -31,7 +31,7 @@ export default function SignUpForm() {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/create-store`, {
+      const response = await fetch(`https://webpromox-production.up.railway.app/create-store`, {
         body: JSON.stringify({ store_name: storeName, email, password }),
         headers: {
           "Content-Type": "application/json",
