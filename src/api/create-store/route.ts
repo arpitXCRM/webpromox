@@ -9,7 +9,6 @@ export async function POST(
   res: MedusaResponse
 ): Promise<void> {
 
-  console.log("REACHED");
   const { result } = await createStoreWorkflow(req.scope).run({
     input: req.body,
   });
