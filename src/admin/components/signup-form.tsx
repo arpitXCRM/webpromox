@@ -10,11 +10,11 @@ import {
 } from "@medusajs/ui";
 
 export default function SignUpForm() {
-  
   const [storeName, setStoreName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // console.log("process.env.NEXT_PUBLIC_AUTH_CORS",process.env.NEXT_PUBLIC_AUTH_CORS);
+  // let __BACKEND_URL__ = process.env.NEXT_PUBLIC_AUTH_CORS;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
